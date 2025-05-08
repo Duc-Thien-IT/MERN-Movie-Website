@@ -2,7 +2,6 @@
 Build website watch movie with ReactJS, NodeJS, Express, MongoDB.
 
 About This Production:
-
 ⚛️ Tech Stack: React.js, Node.js, Express.js, MongoDB, Tailwind
 🔐 Authentication with JWT
 📱 Responsive UI
@@ -14,13 +13,14 @@ About This Production:
 💙 Awesome Landing Page
 🌐 Deployment
 🚀 And Many More Cool Features
+
 Setup .env file
 PORT=5000
 MONGO_URI=your_mongo_uri
 NODE_ENV=development
 JWT_SECRET=your_jwt_secre
 TMDB_API_KEY=your_tmdb_api_key
+
 Run this app locally
-npm run build
-Start the app
-npm run start
+1. Build app     -> npm run build
+2. Start the app -> npm run start
