@@ -19,31 +19,41 @@ export const handleChat = async (req, res) => {
     const lastMessage = messages[messages.length - 1].content.toLowerCase();
     const isMovieRelated = checkIfMovieRelated(lastMessage);
     
-    // Gọi OpenAI API để xử lý tin nhắn
-    const response = await axios.post(
-      'https://api.openai.com/v1/chat/completions',
-      {
-        model: 'gpt-3.5-turbo',
-        messages: [
-          { 
-            role: 'system', 
-            content: 'Bạn là trợ lý Netflix, giúp người dùng tìm kiếm và gợi ý phim. Trả lời ngắn gọn và thân thiện.'
-          },
-          ...messages
-        ],
-        max_tokens: 250,
-        temperature: 0.7,
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${ENV_VARS.OPENAI_API_KEY}`,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-
-    let reply = response.data.choices[0].message.content;
+    // Thử gọi OpenAI API hoặc sử dụng fallback
+    let reply;
     let movieData = null;
+    
+    try {
+      // Gọi OpenAI API để xử lý tin nhắn
+      const response = await axios.post(
+        'https://api.openai.com/v1/chat/completions',
+        {
+          model: 'gpt-3.5-turbo',
+          messages: [
+            { 
+              role: 'system', 
+              content: 'Bạn là trợ lý Netflix, giúp người dùng tìm kiếm và gợi ý phim. Trả lời ngắn gọn và thân thiện.'
+            },
+            ...messages
+          ],
+          max_tokens: 250,
+          temperature: 0.7,
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${ENV_VARS.OPENAI_API_KEY}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      reply = response.data.choices[0].message.content;
+    } catch (apiError) {
+      console.warn('OpenAI API error:', apiError.message);
+      
+      // Sử dụng phản hồi dự phòng nếu OpenAI API không khả dụng
+      reply = generateFallbackResponse(lastMessage);
+    }
 
     // Nếu tin nhắn liên quan đến phim, và có API TMDB, tìm kiếm phim
     if (isMovieRelated && ENV_VARS.TMDB_API_KEY) {
@@ -58,20 +68,33 @@ export const handleChat = async (req, res) => {
   } catch (error) {
     console.error('Chat controller error:', error);
     
-    // Xử lý lỗi chi tiết từ OpenAI API
-    if (error.response && error.response.data) {
-      return res.status(error.response.status).json({
-        success: false,
-        message: error.response.data.error.message || 'Error processing with AI service'
-      });
-    }
-    
     return res.status(500).json({
       success: false,
       message: 'Internal server error'
     });
   }
 };
+
+// Hàm tạo phản hồi dự phòng khi OpenAI API không khả dụng
+function generateFallbackResponse(message) {
+  const movieKeywords = {
+    'phim hành động': 'Một số phim hành động nổi tiếng trên Netflix bao gồm Extraction, The Old Guard, và 6 Underground.',
+    'phim kinh dị': 'Một số phim kinh dị hay trên Netflix là The Haunting of Hill House, Bird Box, và The Ritual.',
+    'phim tình cảm': 'Bạn có thể thích các phim tình cảm như To All the Boys I\'ve Loved Before, Always Be My Maybe, hoặc Set It Up.',
+    'phim hài': 'Một số phim hài được yêu thích trên Netflix bao gồm Murder Mystery, The Wrong Missy, và Eurovision Song Contest.',
+    'phim khoa học viễn tưởng': 'The Platform, Black Mirror, và Altered Carbon là những lựa chọn khoa học viễn tưởng tuyệt vời trên Netflix.'
+  };
+
+  // Kiểm tra từ khóa trong tin nhắn
+  for (const [keyword, response] of Object.entries(movieKeywords)) {
+    if (message.includes(keyword)) {
+      return response;
+    }
+  }
+
+  // Phản hồi mặc định nếu không tìm thấy từ khóa
+  return 'Tôi có thể gợi ý các bộ phim hay trên Netflix. Bạn thích thể loại gì? Hành động, kinh dị, tình cảm, hài, hay khoa học viễn tưởng?';
+}
 
 // Hàm kiểm tra nếu tin nhắn liên quan đến phim
 function checkIfMovieRelated(message) {
