@@ -5,12 +5,15 @@ import useGetTrendingContent from "../../hooks/useGetTrendingContent";
 import { MOVIE_CATEGORIES, ORIGINAL_IMG_BASE_URL, TV_CATEGORIES } from "../../utils/constants";
 import { useContentStore } from "../../store/content";
 import MovieSlider from "../../components/MovieSlider";
+import RecommendationSlider from "../../components/RecommendationSlider";
 import { useState } from "react";
+import { useAuthStore } from "../../store/authUser";
 
 const HomeScreen = () => {
 	const { trendingContent } = useGetTrendingContent();
 	const { contentType } = useContentStore();
 	const [imgLoading, setImgLoading] = useState(true);
+	const { user } = useAuthStore();
 
 	if (!trendingContent)
 		return (
@@ -86,6 +89,10 @@ const HomeScreen = () => {
 			</div>
 
 			<div className='flex flex-col gap-10 bg-black py-10'>
+				{/* Display recommendations as the first category */}
+				{user && <RecommendationSlider />}
+				
+				{/* Then display regular categories */}
 				{contentType === "movie"
 					? MOVIE_CATEGORIES.map((category) => <MovieSlider key={category} category={category} />)
 					: TV_CATEGORIES.map((category) => <MovieSlider key={category} category={category} />)}

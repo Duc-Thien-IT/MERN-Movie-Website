@@ -6,6 +6,7 @@ import {
 	searchPerson,
 	searchTv,
 } from "../controllers/search.controller.js";
+import { trackMovieView } from "../middleware/tracking.js";
 
 const router = express.Router();
 
@@ -37,7 +38,7 @@ const router = express.Router();
  *       500:
  *         description: Internal Server Error
  */
-router.get("/person/:query", searchPerson);
+router.get("/person/:query", trackMovieView, searchPerson);
 
 /**
  * @swagger
@@ -60,7 +61,7 @@ router.get("/person/:query", searchPerson);
  *       500:
  *         description: Internal Server Error
  */
-router.get("/movie/:query", searchMovie);
+router.get("/movie/:query", trackMovieView, searchMovie);
 
 /**
  * @swagger
@@ -83,7 +84,7 @@ router.get("/movie/:query", searchMovie);
  *       500:
  *         description: Internal Server Error
  */
-router.get("/tv/:query", searchTv);
+router.get("/tv/:query", trackMovieView, searchTv);
 
 /**
  * @swagger
@@ -99,7 +100,7 @@ router.get("/tv/:query", searchTv);
  *       500:
  *         description: Internal Server Error
  */
-router.get("/history", getSearchHistory);
+router.get("/history",trackMovieView, getSearchHistory);
 
 /**
  * @swagger
@@ -122,6 +123,6 @@ router.get("/history", getSearchHistory);
  *       500:
  *         description: Internal Server Error
  */
-router.delete("/history/:id", removeItemFromSearchHistory);
+router.delete("/history/:id",trackMovieView, removeItemFromSearchHistory);
 
 export default router;

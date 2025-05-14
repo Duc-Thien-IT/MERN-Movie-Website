@@ -6,6 +6,7 @@ import {
 	getSimilarMovies,
 	getTrendingMovie,
 } from "../controllers/movie.controller.js";
+import { trackMovieView } from "../middleware/tracking.js";
 
 const router = express.Router();
 
@@ -74,7 +75,7 @@ router.get("/:id/trailers", getMovieTrailers);
  *       500:
  *         description: Internal Server Error
  */
-router.get("/:id/details", getMovieDetails);
+router.get("/:id/details", trackMovieView, getMovieDetails);
 
 /**
  * @swagger
