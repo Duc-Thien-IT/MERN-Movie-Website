@@ -1,0 +1,21 @@
+-------------
+1. npm init -y
+2. npm install express jsonwebtoken mongoose cookie-parser dotenv axios bcryptjs
+(Change command line in package.json "script",...)
+3. npm install nodemon -D
+
+--------------
+-- Frontend --
+1. npm create vite@latest .
+2. npm i
+3. npm i axios lucide-react react-player react-hot-toast react-router-dom zustand
+
+
+Deloy Production and Change Command Package Json (script -> build, start, dev)
+--------------
+1. npm install --save-dev cross-env
+
+MONGO_URL=
+JWT_SECRET=
+NODE_ENV=
+TMDB_API_KEY=
