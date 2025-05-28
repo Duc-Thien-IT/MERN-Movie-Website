@@ -1,0 +1,6 @@
+E:\LuuDuLieuSinhVien\KDPM_50_TranDucThien\Cau3\Cau3\bin\Debug\Cau3.exe.config
+E:\LuuDuLieuSinhVien\KDPM_50_TranDucThien\Cau3\Cau3\obj\Debug\Cau3.csprojResolveAssemblyReference.cache
+E:\LuuDuLieuSinhVien\KDPM_50_TranDucThien\Cau3\Cau3\bin\Debug\Cau3.exe
+E:\LuuDuLieuSinhVien\KDPM_50_TranDucThien\Cau3\Cau3\bin\Debug\Cau3.pdb
+E:\LuuDuLieuSinhVien\KDPM_50_TranDucThien\Cau3\Cau3\obj\Debug\Cau3.exe
+E:\LuuDuLieuSinhVien\KDPM_50_TranDucThien\Cau3\Cau3\obj\Debug\Cau3.pdb

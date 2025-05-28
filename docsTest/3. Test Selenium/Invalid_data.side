@@ -1,0 +1,108 @@
+{
+  "id": "94e031e8-fb95-45b3-869a-16be54da68b8",
+  "version": "2.0",
+  "name": "Invalid_data",
+  "url": "https://www.calculator.io",
+  "tests": [{
+    "id": "7badf060-adfc-4881-ab08-b08c0cfdb07f",
+    "name": "Invalid_data",
+    "commands": [{
+      "id": "4efb69eb-c325-49c0-99e0-abf22b2f61bd",
+      "comment": "",
+      "command": "open",
+      "target": "/combinations-calculator/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e11f40ae-b22e-41b2-a985-d178c3f40e00",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6ef5f6ff-0bd2-4f81-96e3-95d4d2dc99ff",
+      "comment": "",
+      "command": "click",
+      "target": "id=n",
+      "targets": [
+        ["id=n", "id"],
+        ["css=#n", "css:finder"],
+        ["xpath=//input[@id='n']", "xpath:attributes"],
+        ["xpath=//div[@id='calculator_form']/div/div/div/label/div/input", "xpath:idRelative"],
+        ["xpath=//label/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "22225034-4d7a-40c4-a559-d9a015e0cda3",
+      "comment": "",
+      "command": "type",
+      "target": "id=n",
+      "targets": [
+        ["id=n", "id"],
+        ["css=#n", "css:finder"],
+        ["xpath=//input[@id='n']", "xpath:attributes"],
+        ["xpath=//div[@id='calculator_form']/div/div/div/label/div/input", "xpath:idRelative"],
+        ["xpath=//label/div/input", "xpath:position"]
+      ],
+      "value": "-1"
+    }, {
+      "id": "d429322f-27d1-4623-98dc-2a2fa9fca760",
+      "comment": "",
+      "command": "click",
+      "target": "id=r",
+      "targets": [
+        ["id=r", "id"],
+        ["css=#r", "css:finder"],
+        ["xpath=//input[@id='r']", "xpath:attributes"],
+        ["xpath=//div[@id='calculator_form']/div/div/div/label[2]/div/input", "xpath:idRelative"],
+        ["xpath=//label[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b30fcf41-6e0e-4fc4-a3a6-bbdcab986547",
+      "comment": "",
+      "command": "type",
+      "target": "id=r",
+      "targets": [
+        ["id=r", "id"],
+        ["css=#r", "css:finder"],
+        ["xpath=//input[@id='r']", "xpath:attributes"],
+        ["xpath=//div[@id='calculator_form']/div/div/div/label[2]/div/input", "xpath:idRelative"],
+        ["xpath=//label[2]/div/input", "xpath:position"]
+      ],
+      "value": "-1"
+    }, {
+      "id": "a29e0436-639a-419c-99c2-69f9a9246c47",
+      "comment": "",
+      "command": "click",
+      "target": "id=action-button",
+      "targets": [
+        ["id=action-button", "id"],
+        ["css=#action-button", "css:finder"],
+        ["xpath=//button[@id='action-button']", "xpath:attributes"],
+        ["xpath=//div[@id='calculator_form']/div/div[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Calculate')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "eb208b99-44da-486a-aec5-cba7a5409c80",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,2)",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "4732dc1f-3ac9-435c-92fe-2b74f9a7acd4",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["7badf060-adfc-4881-ab08-b08c0cfdb07f"]
+  }],
+  "urls": ["https://www.calculator.io/"],
+  "plugins": []
+}
